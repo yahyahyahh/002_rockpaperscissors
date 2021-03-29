@@ -6,21 +6,19 @@ def check_rounds():
         response = input("How many rounds: ")
 
         round_error = "Please type either <enter> or an integer that is more than 0"
+        if response != "":
+            try:
+                response = int(response)
 
-        if __name__ == '__main__':
-            if response != "":
-                try:
-                    response = int(response)
-
-                    if response < 1:
-                        print(round_error)
-                        continue
-
-                except ValueError:
+                if response < 1:
                     print(round_error)
                     continue
 
-                return response
+            except ValueError:
+                print(round_error)
+                continue
+
+        return response
 
 
 # main routine goes here
@@ -53,5 +51,9 @@ while end_game == "no":
     print("you chose {}".format(choose))
 
     rounds_played += 1
+
+    # end game if requested # of rounds has been played
+    if rounds_played == rounds:
+        break
 
 print("Thanks for playing")
