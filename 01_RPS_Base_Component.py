@@ -56,7 +56,6 @@ rps_list = ["rock", "paper", "scissors", "xxx"]
 
 # Ask user for # of rounds then loop...
 rounds_played = 0
-choose_instruction = "Please choose rock (r), paper (p), or scissors (s)"
 
 
 # Ask user for # of rounds, <enter> for infinite mode
@@ -73,7 +72,8 @@ while end_game == "no":
         heading = "Round {} of {}".format(rounds_played + 1, rounds)
 
     print(heading)
-    choose_error = "Please choose from rock / paper / scissors (or xxx to quit)"
+    choose_instruction = "Please choose rock (r), paper (p), or scissors(s) or 'xxx' to exit "
+    choose_error = "Please choose from rock / paper / scissors (or xxx to quit) "
 
     # Ask user for choice and check its valid
     choose = choice_checker(choose_instruction, rps_list, choose_error)
@@ -86,7 +86,6 @@ while end_game == "no":
         break
 
     # rest of loop / game
-    print("you chose {}".format(choose))
 
     rounds_played += 1
 
