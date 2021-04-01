@@ -81,6 +81,12 @@ while end_game == "no":
     # print out choice for comparison purposes
     print("You chose {}".format(choose))
 
+    # get computer choice
+    comp_choice = random.choice(rps_list[:-1])
+    print("Comp Choice: ", comp_choice)
+
+    # compare choices
+
     # end game if exit code is typed
     if choose == "xxx":
         break
