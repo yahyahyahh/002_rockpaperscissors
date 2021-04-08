@@ -23,4 +23,9 @@ for item in rps_list:
 
         if result == "tie":
             feedback = "It's a tie"
-            
+
+        print("You chose {}, the computer chose {}.  "
+              "\nResult: {}".format(user_choice, comp_choice, result))
+
+    comp_index += 1
+    print()
