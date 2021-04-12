@@ -91,7 +91,8 @@ while end_game == "no":
 
     # compare choices
     if user_choice == comp_choice:
-        result = "Tie"
+        result = "tie"
+        rounds_drawn += 1
     elif user_choice == "rock" and comp_choice == "scissors":
         result = "won"
     elif user_choice == "paper" and comp_choice == "rock":
@@ -100,10 +101,13 @@ while end_game == "no":
         result = "won"
     else:
         result = "lost"
+        rounds_lost += 1
 
     if result == "tie":
         feedback = "It's a tie"
-    else
+    else:
+
+        feedback = "{} vs {} - you {}".format(user_choice, comp_choice, result)
 
     # output results
     print(feedback)
@@ -114,7 +118,17 @@ while end_game == "no":
     if rounds_played == rounds:
         break
 
-print("Thanks for playing")
 
 # Ask user if they want to see their game history.
 # If 'yes', show game history
+
+# Show game stats
+# Quick Calculations (stats)
+rounds_won = rounds_played - rounds_lost - rounds_drawn
+
+# End of Game Statements
+print()
+print('***** End Game Summary *****')
+print("Won: {} \t|\t Lost: {} \t|\t Draw: {}".format(rounds_won, rounds_lost,
+                                                     rounds_drawn))
+print("thanks for playing")
