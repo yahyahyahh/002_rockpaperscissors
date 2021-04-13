@@ -42,6 +42,15 @@ def choice_checker(question, valid_list, error):
         print()
 
 
+def yes_no(question):
+    valid = False
+    while not valid:
+        response = input("Would you like to see your stats? ").lower()
+
+        if response == "yes" or response == "y":
+            response = "yes"
+            return response
+
 # Main routine goes here
 
 
@@ -54,6 +63,8 @@ rps_list = ["rock", "paper", "scissors", "xxx"]
 
 
 # Ask user for # of rounds then loop...
+game_summary = []
+
 rounds_played = 0
 rounds_lost = 0
 rounds_drawn = 0
@@ -112,28 +123,19 @@ while end_game == "no":
     # output results
     print(feedback)
 
+    round_result = "Round {}: {} vs {}, {}".format(rounds_played + 1, user_choice, comp_choice, result)
+
+    game_summary.append(round_result)
+
     rounds_played += 1
 
-    
     # end game if requested # of rounds has been played
     if rounds_played == rounds:
         break
-    
-game_summary.append(rounds)
+
 
 # Ask user if they want to see their game history.
 # If 'yes', show game history
-for item in range(0, 5):
-    result = input("choose result: ")
-
-    outcome = "Round {}: {}".format(item, result)
-
-    if result == "lost":
-        rounds_lost += 1
-    elif result == "tie":
-        rounds_drawn += 1
-
-    
 
 rounds_won = rounds_played - rounds_lost - rounds_drawn
 
@@ -152,10 +154,10 @@ print()
 # displays game stats with % values to the nearest whole number
 print("******** Game Stats *********")
 print("Win: {}, ({:.0f}%)\nLoss: {}, "
-    "({:.0f}%)\nTie:{}, ({:.0f}%)".format(rounds_won,
-    percent_win, rounds_lost, percent_lose, rounds_drawn, percent_tie))
+      "({:.0f}%)\nTie:{}, ({:.0f}%)".format(rounds_won, percent_win, rounds_lost, percent_lose,
+                                            rounds_drawn, percent_tie))
 
-# Show game stats
+# Show game
 # Quick Calculations (stats)
 rounds_won = rounds_played - rounds_lost - rounds_drawn
 

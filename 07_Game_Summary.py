@@ -33,5 +33,7 @@ print()
 # displays game stats with % values to the nearest whole number
 print("******** Game Stats *********")
 print("Win: {}, ({:.0f}%)\nLoss: {}, "
-    "({:.0f}%)\nTie:{}, ({:.0f}%)".format(rounds_won,
-    percent_win, rounds_lost, percent_lose, rounds_drawn, percent_tie))
+      "({:.0f}%)\nTie:{}, ({:.0f}%)".format(rounds_won, percent_win,
+                                            rounds_lost, percent_lose,
+                                            rounds_drawn, percent_tie))
+
