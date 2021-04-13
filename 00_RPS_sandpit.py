@@ -6,3 +6,6 @@ for item in range (0, 4):
 
 print()
 print("**** The Fruit List ****")
+
+for item in fruit_list:
+    print(item)
