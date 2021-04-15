@@ -3,9 +3,10 @@ import random
 
 # Functions go here
 
+# Round Checker - Checks how many rounds player wants or Infinite mode
 def check_rounds():
     while True:
-        response = input("How many rounds: ")
+        response = input("How many rounds would you like to play?: ")
 
         round_error = "Please type either <enter> or an integer that is more than 0"
         if response != "":
@@ -23,6 +24,7 @@ def check_rounds():
         return response
 
 
+# Choice checker - Check for valid answer
 def choice_checker(question, valid_list, error):
 
     valid = False
@@ -42,16 +44,40 @@ def choice_checker(question, valid_list, error):
         print()
 
 
+# yes-no checker
 def yes_no(question):
     valid = False
     while not valid:
-        response = input("Would you like to see your stats? ").lower()
+        response = input(question).lower()
 
         if response == "yes" or response == "y":
             response = "yes"
             return response
+        elif response == "no" or response == "n":
+            response = "no"
+            return response
+
+        else:
+            print("Please answer yes / no")
+
+
+# decorates statements and questions
+def statement_generator(statement, decoration):
+
+    sides = decoration * 3
+
+    statement = "{} {} {}".format(sides, statement, sides)
+    top_bottom = decoration * len(statement)
+
+    print(top_bottom)
+    print(statement)
+    print(top_bottom)
+
+    return ""
 
 # Main routine goes here
+statement_generator("Welcome to the Rock, Paper, Scissors Game", "*")
+print()
 
 
 # Lists of valid responses
@@ -60,6 +86,10 @@ rps_list = ["rock", "paper", "scissors", "xxx"]
 
 # Ask user if they've played before
 # If 'no', show instructions
+show_instructions = yes_no("Have you played this game before? ")
+print("You chose: {}".format(show_instructions))
+if show_instructions == "no":
+    print(instructions)
 
 
 # Ask user for # of rounds then loop...
@@ -68,6 +98,7 @@ game_summary = []
 rounds_played = 0
 rounds_lost = 0
 rounds_drawn = 0
+rounds_won = rounds_played - rounds_lost - rounds_drawn
 
 # Ask user for # of rounds, <enter> for infinite mode
 rounds = check_rounds()
@@ -104,6 +135,7 @@ while end_game == "no":
     if user_choice == comp_choice:
         result = "tie"
         rounds_drawn += 1
+        prize_decoration = "-"
     elif user_choice == "rock" and comp_choice == "scissors":
         result = "won"
     elif user_choice == "paper" and comp_choice == "rock":
@@ -113,6 +145,10 @@ while end_game == "no":
     else:
         result = "lost"
         rounds_lost += 1
+        prize_decoration = "F"
+
+    if result == "won":
+        prize_decoration = "!"
 
     if result == "tie":
         feedback = "It's a tie"
@@ -121,7 +157,7 @@ while end_game == "no":
         feedback = "{} vs {} - you {}".format(user_choice, comp_choice, result)
 
     # output results
-    print(feedback)
+    statement_generator(feedback, prize_decoration)
 
     round_result = "Round {}: {} vs {}, {}".format(rounds_played + 1, user_choice, comp_choice, result)
 
@@ -135,35 +171,36 @@ while end_game == "no":
 
 
 # Ask user if they want to see their game history.
-# If 'yes', show game history
+show_stats = yes_no("Would you like to see your stats? ")
+print("You chose {}".format(show_stats))
+if show_stats == "yes":
 
-rounds_won = rounds_played - rounds_lost - rounds_drawn
+    # If 'yes', show game history
+    # **** calculate game stats ******
+    percent_win = rounds_won / rounds_played * 100
+    percent_lose = rounds_lost / rounds_played * 100
+    percent_tie = rounds_drawn / rounds_played * 100
 
-# **** calculate game stats ******
-percent_win = rounds_won / rounds_played * 100
-percent_lose = rounds_lost / rounds_played * 100
-percent_tie = rounds_drawn / rounds_played * 100
+    print()
+    print("***** Game History *******")
+    for game in game_summary:
+        print(game)
 
-print()
-print("***** Game History *******")
-for game in game_summary:
-    print(game)
+    print()
 
-print()
+    # displays game stats with % values to the nearest whole number
+    print("******** Game Stats *********")
+    print("Win: {}, ({:.0f}%)\nLoss: {}, "
+          "({:.0f}%)\nTie:{}, ({:.0f}%)".format(rounds_won, percent_win, rounds_lost, percent_lose,
+                                                rounds_drawn, percent_tie))
 
-# displays game stats with % values to the nearest whole number
-print("******** Game Stats *********")
-print("Win: {}, ({:.0f}%)\nLoss: {}, "
-      "({:.0f}%)\nTie:{}, ({:.0f}%)".format(rounds_won, percent_win, rounds_lost, percent_lose,
-                                            rounds_drawn, percent_tie))
+    # Show game
+    # Quick Calculations (stats)
+    rounds_won = rounds_played - rounds_lost - rounds_drawn
 
-# Show game
-# Quick Calculations (stats)
-rounds_won = rounds_played - rounds_lost - rounds_drawn
-
-# End of Game Statements
-print()
-print('***** End Game Summary *****')
-print("Won: {} \t|\t Lost: {} \t|\t Draw: {}".format(rounds_won, rounds_lost,
-                                                     rounds_drawn))
-print("thanks for playing")
+    # End of Game Statements
+    print()
+    print('***** End Game Summary *****')
+    print("Won: {} \t|\t Lost: {} \t|\t Draw: {}".format(rounds_won, rounds_lost,
+                                                         rounds_drawn))
+print("Thank you for playing !!!")
