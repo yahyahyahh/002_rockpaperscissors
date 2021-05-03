@@ -75,6 +75,20 @@ def statement_generator(statement, decoration):
 
     return ""
 
+
+def instructions():
+    print("**** How to Play ****")
+    print()
+    print("In this game, you have the option between a specific amount of rounds, or ")
+    print("infinite mode. To play infinite mode, press <enter> , or enter a specific ")
+    print("number for that many rounds. To play the game, enter 'rock' or 'r' for rock,")
+    print("'paper' or 'p' for paper, and 'scissors' or 's' for scissors. The computer")
+    print("will then randomly choose an answer, and its basically rock paper scissors")
+    print("from there. At the end of your game, you have the choice to see your game")
+    print("results. Have fun!")
+    print()
+    return""
+
 # Main routine goes here
 statement_generator("Welcome to the Rock, Paper, Scissors Game", "*")
 print()
@@ -88,8 +102,9 @@ rps_list = ["rock", "paper", "scissors", "xxx"]
 # If 'no', show instructions
 show_instructions = yes_no("Have you played this game before? ")
 print("You chose: {}".format(show_instructions))
-if show_instructions == "no":
-    print(instructions)
+if __name__ == '__main__':
+    if show_instructions == "no":
+        instructions()
 
 
 # Ask user for # of rounds then loop...
@@ -98,7 +113,7 @@ game_summary = []
 rounds_played = 0
 rounds_lost = 0
 rounds_drawn = 0
-rounds_won = rounds_played - rounds_lost - rounds_drawn
+
 
 # Ask user for # of rounds, <enter> for infinite mode
 rounds = check_rounds()
@@ -169,6 +184,8 @@ while end_game == "no":
     if rounds_played == rounds:
         break
 
+    # Quick Calculations (stats)
+    rounds_won = rounds_played - rounds_lost - rounds_drawn
 
 # Ask user if they want to see their game history.
 show_stats = yes_no("Would you like to see your stats? ")
@@ -195,9 +212,6 @@ if show_stats == "yes":
                                                 rounds_drawn, percent_tie))
 
     # Show game
-    # Quick Calculations (stats)
-    rounds_won = rounds_played - rounds_lost - rounds_drawn
-
     # End of Game Statements
     print()
     print('***** End Game Summary *****')
